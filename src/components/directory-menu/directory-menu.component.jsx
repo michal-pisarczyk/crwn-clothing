@@ -46,8 +46,7 @@ class DirectoryMenu extends React.Component {
             <MenuItem title={ title }
                       imageUrl={ imageUrl }
                       size={ size }
-                      key={ id }
-                      history={ this.props.history } />
+                      key={ id } />
           ))
         }
       </div>
