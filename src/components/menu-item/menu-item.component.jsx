@@ -1,7 +1,7 @@
 import React from "react";
 import "./menu-item.style.scss"
 
-const MenuItem = ({ title, imageUrl, size }) => (
+const MenuItem = ({ title, imageUrl, size, history }) => (
   <div className={`${ size } menu-item`}>
     <div className="background-image"
          style={{
@@ -10,6 +10,7 @@ const MenuItem = ({ title, imageUrl, size }) => (
     <div className="content">
       <h1 className="title">{ title.toUpperCase() }</h1>
       <span className="subtitle">SHOP NOW</span>
+      <span>{ history.location.pathname }</span>
     </div>
   </div>
 );
