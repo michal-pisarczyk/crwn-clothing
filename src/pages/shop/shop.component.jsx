@@ -1,14 +1,14 @@
-import { Component } from "react";
+import React from "react";
 import SHOP_DATA from "./shop.data.js";
 
-class ShopPage extends { Component } {
-  constructor(props) {
-    super(props);
-  }
+class ShopPage extends React.Component {
+  constructor() {
+    super();
 
-  this.state = {
-    collections: SHOP_DATA
-  };
+    this.state = {
+      collections: SHOP_DATA
+    }
+  }
 
   render() {
     return <div>SHOP PAGE</div>; 
