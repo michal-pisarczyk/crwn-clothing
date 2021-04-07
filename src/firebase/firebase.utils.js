@@ -9,6 +9,12 @@ export const createUserProfileDocument = async (userAuth) => {
   const snapshot = await userReference.get();
   console.log(snapshot.exists);
   console.log(snapshot.id); // id of the authenticated user
+
+  if (!snapshot.exists) {
+    const { displayName, email } = userAuth;
+    console.log(displayName);
+    console.log(email);
+  }
 }
 
 firebase.initializeApp({
