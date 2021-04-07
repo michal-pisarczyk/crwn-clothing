@@ -7,15 +7,20 @@ export const createUserProfileDocument = async (userAuth) => {
 
   const userReference = database.doc(`users/${userAuth.uid}`);
   const snapshot = await userReference.get();
-  console.log(snapshot.exists);
-  console.log(snapshot.id); // id of the authenticated user
 
   if (!snapshot.exists) {
     const { displayName, email } = userAuth;
     const createdAt = new Date();
-    console.log(displayName);
-    console.log(email);
-    console.log(createdAt);
+
+    try {
+      await userReference.set({
+        displayName,
+        email,
+        createdAt
+      });
+    } catch (error) {
+
+    }
   }
 }
 
