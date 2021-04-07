@@ -5,8 +5,10 @@ import "firebase/firestore";
 export const createUserProfileDocument = async (userAuth) => {
   if (!userAuth) return;
 
-  const result = await database.collection("users").doc("random_id").get();
-  console.log(result.exists);
+  const userReference = database.doc(`users/${userAuth.uid}`);
+  const snapshot = await userReference.get();
+  console.log(snapshot.exists);
+  console.log(snapshot.id); // id of the authenticated user
 }
 
 firebase.initializeApp({
