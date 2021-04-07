@@ -2,6 +2,13 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 
+export const createUserProfileDocument = async (userAuth) => {
+  if (!userAuth) return;
+
+  const result = await database.collection("users").doc("random_id").get();
+  console.log(result.exists);
+}
+
 firebase.initializeApp({
   apiKey: "AIzaSyCmaX7SufViYW6PBbw0O_Me3xTiKVj_ECk",
   authDomain: "crwn-db-4d2eb.firebaseapp.com",
