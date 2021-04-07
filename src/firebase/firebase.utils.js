@@ -2,7 +2,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 
-export const createUserProfileDocument = async (userAuth) => {
+export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
 
   const userReference = database.doc(`users/${userAuth.uid}`);
@@ -16,7 +16,8 @@ export const createUserProfileDocument = async (userAuth) => {
       await userReference.set({
         displayName,
         email,
-        createdAt
+        createdAt,
+        ...additionalData
       });
     } catch (error) {
 
