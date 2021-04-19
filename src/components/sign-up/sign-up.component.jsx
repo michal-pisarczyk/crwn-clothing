@@ -49,31 +49,40 @@ class SignUp extends React.Component {
     }
   }
 
+  handleChange = event => {
+    const { value, name } = event.target;
+    this.setState({ [name]: value });
+  }
+
   render() {
     return (
       <div className="sign-up">
-        <h2>I do not have an account.</h2>
+        <h2 className="title">I do not have an account.</h2>
         <span>Sign up with your email and password.</span>
         <form onSubmit={ this.handleSubmit }>
           <FormInput label="Display Name"
                      type="text"
-                     name="sign-up-name"
+                     name="displayName"
                      value={ this.state.displayName }
+                     handleChange={ this.handleChange }
                      required />
           <FormInput label="Email"
                      type="email"
-                     name="sign-up-email"
+                     name="email"
                      value={ this.state.email }
+                     handleChange={ this.handleChange }
                      required />
           <FormInput label="Password"
                      type="password"
-                     name="sign-up-password"
+                     name="password"
                      value={ this.state.password }
+                     handleChange={ this.handleChange }
                      required />
           <FormInput label="Confirm Password"
                      type="password"
-                     name="sign-up-password-confirmation"
+                     name="confirmPassword"
                      value={ this.state.confirmPassword }
+                     handleChange={ this.handleChange }
                      required />
           <CustomButton type="submit">Sign up</CustomButton>
         </form>
