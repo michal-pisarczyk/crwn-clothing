@@ -36,5 +36,17 @@
     width: 80%;
     top: 255px;
     opacity: .7;
+    display: none;
+  }
+
+  &:hover {
+    .image {
+      opacity: .8;
+    }
+
+    .custom-button {
+      display: flex;
+      opacity: .85;
+    }
   }
 }
