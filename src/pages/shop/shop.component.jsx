@@ -1,5 +1,6 @@
 import React from "react";
 import CollectionPreview from "../../components/collection-preview/collection-preview.component";
+import { selectShopItemCollections } from "../../redux/shop/shop.selectors";
 
 class ShopPage extends React.Component {
   constructor() {
@@ -269,5 +270,9 @@ class ShopPage extends React.Component {
     ); 
   }
 }
+
+const mapStateToProps = state => ({
+  collections: selectShopItemCollections(state)
+});
 
 export default ShopPage;
