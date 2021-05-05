@@ -4,15 +4,23 @@ import CollectionPreview from "../collection-preview/collection-preview.componen
 import { selectShopItemCollections } from "../../redux/shop/shop.selectors";
 import { connect } from "react-redux";
 
-const CollectionsOverview = ({ collections }) => (
-  <div className="collections-overview">
-    {
-      collections.map(({ id, ...otherCollectionProps }) => (
-        <CollectionPreview key={ id } { ...otherCollectionProps } />
-      ))
-    }
-  </div>
-);
+const CollectionsOverview = ({ collections }) => {
+  const collectionsForOverview = [];
+  for (const property in collections) {
+    collectionsForOverview.push(collections[property]);
+  }
+
+  return (
+    <div className="collections-overview">
+      {
+        collectionsForOverview.map(
+          ({ id, ...otherCollectionProps }) =>
+            <CollectionPreview key={ id } { ...otherCollectionProps } />
+        )
+      }
+    </div>
+  );
+};
 
 const mapStateToProps = state => ({
   collections: selectShopItemCollections(state)
