@@ -1,14 +1,15 @@
 import React from "react";
 import "./collections-overview.style.scss";
-import CollectionPreview from "../collection-preview/collection-preview.component";
-import { selectShopItemCollections } from "../../redux/shop/shop.selectors";
+import CollectionPreview
+  from "../collection-preview/collection-preview.component";
+import { selectShopItemCollections }
+  from "../../redux/shop/shop.selectors";
 import { connect } from "react-redux";
 
 const CollectionsOverview = ({ collections }) => {
-  const collectionsForOverview = [];
-  for (const property in collections) {
-    collectionsForOverview.push(collections[property]);
-  }
+  const collectionsForOverview = Object
+                                   .keys(collections)
+                                   .map(key => collections[key]);
 
   return (
     <div className="collections-overview">
