@@ -28,4 +28,27 @@
     margin-left: auto;
     font-size: 36px;
   }
+
+  .test-warning {
+    display: grid;
+    grid-template-columns: .8fr 1fr;
+    grid-gap: 10px;
+    width: 60%;
+    min-width: 360px;
+    margin: 40px 0;
+    font-size: 24px;
+    color: red;
+    text-align: left;
+
+    span:first-child {
+      grid-column: 1 / span 2;
+      font-size: 18px;
+      text-align: center;
+    }
+
+    span:nth-child(2n+2) {
+      color: gray;
+      text-align: right;
+    }
+  }
 }
