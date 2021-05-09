@@ -19,13 +19,20 @@ const Header = ({ currentUser, hidden }) => (
       <Logo />
     </LogoContainer>
     <OptionsContainer>
-      <OptionLink to="/shop">SHOP</OptionLink>
-      <OptionLink to="/contact">CONTACT</OptionLink>
+      <OptionLink to="/shop">
+        SHOP
+      </OptionLink>
+      <OptionLink to="/contact">
+        CONTACT
+      </OptionLink>
       {
         currentUser ?
-        <OptionDiv
-          onClick={ () => auth.signOut() }>SIGN OUT</OptionDiv> :
-        <OptionLink to="/signinsignup">SIGN IN</OptionLink>
+        <OptionDiv onClick={ () => auth.signOut() }>
+          SIGN OUT
+        </OptionDiv> :
+        <OptionLink to="/signinsignup">
+          SIGN IN
+        </OptionLink>
       }
       <CartIcon />
     </OptionsContainer>
