@@ -1,7 +1,7 @@
 import React from "react";
-import { ReactComponent as Logo } from "../../assets/crown.svg";
 import { HeaderContainer,
          LogoContainer,
+         Logo,
          OptionsContainer,
          OptionLink,
          OptionDiv } from "./header.style";
@@ -15,16 +15,10 @@ import { createStructuredSelector } from "reselect";
 
 const Header = ({ currentUser, hidden }) => (
   <HeaderContainer>
-    <LogoContainer to="/">
-      <Logo />
-    </LogoContainer>
+    <LogoContainer to="/"><Logo /></LogoContainer>
     <OptionsContainer>
-      <OptionLink to="/shop">
-        SHOP
-      </OptionLink>
-      <OptionLink to="/contact">
-        CONTACT
-      </OptionLink>
+      <OptionLink to="/shop">SHOP</OptionLink>
+      <OptionLink to="/contact">CONTACT</OptionLink>
       {
         currentUser ?
         <OptionDiv onClick={ () => auth.signOut() }>
