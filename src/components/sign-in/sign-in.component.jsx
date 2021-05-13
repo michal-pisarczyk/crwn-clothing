@@ -67,7 +67,7 @@ class SignIn extends React.Component {
           </ButtonsContainer>
         </form>
       </SignInContainer>
-    )
+    );
   }
 }
 
