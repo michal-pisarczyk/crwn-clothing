@@ -17,7 +17,7 @@ export const selectCollection = memoize((collectionUrlParam) =>
 
 export const selectCollectionsForOverview = createSelector(
   [selectShopItemCollections],
-  collections => Object
-                   .keys(collections)
-                   .map(key => collections[key])
+  collections => collections ?
+                 Object.keys(collections).map(key => collections[key]) :
+                 []
 );
