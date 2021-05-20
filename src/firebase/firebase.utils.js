@@ -5,7 +5,7 @@ import "firebase/firestore";
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
 
-  const userReference = database.doc(`users/${userAuth.uid}`);
+  const userReference = firestore.doc(`users/${userAuth.uid}`);
   const snapshot = await userReference.get();
 
   if (!snapshot.exists) {
@@ -38,7 +38,7 @@ firebase.initializeApp({
 });
 
 export const auth = firebase.auth();
-export const database = firebase.firestore();
+export const firestore = firebase.firestore();
 const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({ prompt: "select_account" });
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
