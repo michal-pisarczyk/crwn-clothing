@@ -24,11 +24,16 @@ class ShopPage extends React.Component {
         };
       });
 
-      console.log(transformedCollection);
+      return transformedCollection.reduce(
+        (accumulator, collection) => {
+          accumulator[collection.title.toLowerCase()] = collection;
+          return accumulator;
+        }, {}
+      );
     }
 
     collectionReference.onSnapshot(async snapshot => {
-      convertSnapshotToMap(snapshot);
+      console.log(convertSnapshotToMap(snapshot));
     });
   }
 
