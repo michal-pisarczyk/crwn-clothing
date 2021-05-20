@@ -6,7 +6,7 @@ import HomePage from "./pages/homepage/homepage.component";
 import ShopPage from "./pages/shop/shop.component";
 import SignInSignUpPage from "./pages/sign-in-sign-up/sign-in-sign-up.component";
 import CheckoutPage from "./pages/checkout/checkout.component";
-import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
+import { auth, createUserProfileDocument, database } from "./firebase/firebase.utils";
 import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/user/user.actions";
 import { selectCurrentUser } from "./redux/user/user.selectors";
@@ -30,8 +30,19 @@ class App extends React.Component {
         });
       }
       setCurrentUser(userAuth);
-      console.log(collections.map(({ title, items }) => ({ title, items })));
-    })
+
+      const addCollectionWithDocs = async objectsArray => {
+        const colReference = database.collection("collections");
+        const batch = database.batch();
+        objectsArray.forEach(obj => {
+          const newDocReference = colReference.doc();
+          batch.set(newDocReference, obj);
+        });
+        return await batch.commit();
+      }
+
+      addCollectionWithDocs(collections.map(({ title, items }) => ({ title, items })));
+    });
   }
 
   componentWillUnmount() {
