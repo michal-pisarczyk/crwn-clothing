@@ -10,12 +10,13 @@ import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/user/user.actions";
 import { selectCurrentUser } from "./redux/user/user.selectors";
+import { selectCollectionsForOverview } from "./redux/shop/shop.selectors";
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    const { setCurrentUser } = this.props;
+    const { setCurrentUser, collections } = this.props;
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
@@ -29,6 +30,7 @@ class App extends React.Component {
         });
       }
       setCurrentUser(userAuth);
+      console.log(collections);
     })
   }
 
@@ -55,7 +57,8 @@ class App extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  currentUser: selectCurrentUser(state)
+  currentUser: selectCurrentUser(state),
+  collections: selectCollectionsForOverview(state)
 });
 
 const mapDispatchToProps = dispatch => ({
