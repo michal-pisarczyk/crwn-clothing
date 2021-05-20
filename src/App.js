@@ -30,7 +30,7 @@ class App extends React.Component {
         });
       }
       setCurrentUser(userAuth);
-      console.log(collections);
+      console.log(collections.map(({ title, items }) => ({ title, items })));
     })
   }
 
