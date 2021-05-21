@@ -12,6 +12,7 @@ export const Title = styled.h1`
 `;
 
 export const Preview = styled.div`
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 10px;
 `;
