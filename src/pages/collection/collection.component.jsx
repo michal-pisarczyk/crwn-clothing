@@ -7,14 +7,16 @@ import { selectCollection } from "../../redux/shop/shop.selectors";
 import { connect } from "react-redux";
 
 const CollectionPage = ({ collection }) => {
-  const { title, items } = collection;
+  if (!collection) {
+    return null;
+  }
 
   return (
     <CollectionPageContainer>
-      <Title>{ title }</Title>
+      <Title>{ collection.title }</Title>
       <Items>
         {
-          items.map(
+          collection.items.map(
             item => <CollectionItem key={ item.id } item={ item } />
           )
         }
