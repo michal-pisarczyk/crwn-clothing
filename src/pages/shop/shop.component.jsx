@@ -50,13 +50,17 @@ class ShopPage extends React.Component {
     //   this.setState({ loading: false });
     // });
 
-    collectionReference
-      .get()
-      .then(snapshot => {
-        const collectionsMap = convertSnapshotToMap(snapshot);
-        updateCollections(collectionsMap);
-        this.setState({ loading: false });
-      });
+    // collectionReference
+    //   .get()
+    //   .then(snapshot => {
+    //     const collectionsMap = convertSnapshotToMap(snapshot);
+    //     updateCollections(collectionsMap);
+    //     this.setState({ loading: false });
+    //   });
+
+    fetch("https://firestore.googleapis.com/v1/projects/crwn-db-4d2eb/databases/(default)/documents/collections")
+    .then(response => response.json())
+    .then(collections => console.log(collections));
   }
 
   render() {
