@@ -44,11 +44,19 @@ class ShopPage extends React.Component {
       );
     }
 
-    this.unsubscribeFromSnapshot = collectionReference.onSnapshot(async snapshot => {
-      const collectionsMap = convertSnapshotToMap(snapshot);
-      updateCollections(collectionsMap);
-      this.setState({ loading: false });
-    });
+    // this.unsubscribeFromSnapshot = collectionReference.onSnapshot(async snapshot => {
+    //   const collectionsMap = convertSnapshotToMap(snapshot);
+    //   updateCollections(collectionsMap);
+    //   this.setState({ loading: false });
+    // });
+
+    collectionReference
+      .get()
+      .then(snapshot => {
+        const collectionsMap = convertSnapshotToMap(snapshot);
+        updateCollections(collectionsMap);
+        this.setState({ loading: false });
+      });
   }
 
   render() {
