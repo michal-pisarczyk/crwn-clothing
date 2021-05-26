@@ -13,6 +13,7 @@ export const fetchCollectionsStart = () => ({
 export const fetchCollectionsStartAsync = () => {
   return dispatch => {
     const collectionReference = firestore.collection("collections");
+    dispatch(fetchCollectionsStart());
 
     const convertSnapshotToMap = collections => {
       const transformedCollection = collections.docs.map(doc => {
@@ -38,7 +39,7 @@ export const fetchCollectionsStartAsync = () => {
       .get()
       .then(snapshot => {
         const collectionsMap = convertSnapshotToMap(snapshot);
-        updateCollections(collectionsMap);
+        // updateCollections(collectionsMap);
         this.setState({ loading: false });
       });
   };
