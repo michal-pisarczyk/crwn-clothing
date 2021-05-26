@@ -10,6 +10,11 @@ export const fetchCollectionsStart = () => ({
   type: ShopActionTypes.FETCH_COLLECTIONS_START
 });
 
+export const fetchCollectionsSuccess = collectionsMap => ({
+  type: ShopActionTypes.FETCH_COLLECTIONS_SUCCESS,
+  payload: collectionsMap
+});
+
 export const fetchCollectionsStartAsync = () => {
   return dispatch => {
     const collectionReference = firestore.collection("collections");
@@ -39,8 +44,8 @@ export const fetchCollectionsStartAsync = () => {
       .get()
       .then(snapshot => {
         const collectionsMap = convertSnapshotToMap(snapshot);
-        // updateCollections(collectionsMap);
-        this.setState({ loading: false });
+        dispatch(fetchCollectionsSuccess(collectionsMap));
+        // this.setState({ loading: false });
       });
   };
 };
