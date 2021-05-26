@@ -1,19 +1,18 @@
 import React from "react";
 import { ShopPageContainer } from "./shop.style";
 import { Route } from "react-router-dom";
-import CollectionsOverview from
-"../../components/collections-overview/collections-overview.component";
+import CollectionsOverviewContainer from
+"../../components/collections-overview/collections-overview.container";
 import CollectionPage from "../collection/collection.component";
 import { connect } from "react-redux";
 import WithSpinner
   from "../../components/with-spinner/with-spinner.component";
 import { fetchCollectionsStartAsync }
   from "../../redux/shop/shop.actions";
-import { selectIsFetching, selectIsLoaded }
+import { selectIsLoaded }
   from "../../redux/shop/shop.selectors";
 import { createStructuredSelector } from "reselect";
 
-const CollectionsOverviewWithSpinner = WithSpinner(CollectionsOverview);
 const CollectionPageWithSpinner = WithSpinner(CollectionPage);
 
 class ShopPage extends React.Component {
@@ -24,15 +23,13 @@ class ShopPage extends React.Component {
   }
 
   render() {
-    const { match, isFetching, isLoaded } = this.props;
+    const { match, isLoaded } = this.props;
 
     return (
       <ShopPageContainer>
         <Route
           exact path={ `${match.path}` }
-          render={ (props) => <CollectionsOverviewWithSpinner
-                                isLoading={ isFetching }
-                                { ...props } /> } />
+          component={ CollectionsOverviewContainer } />
         <Route
           path={ `${match.path}/:collectionId` }
           render={ (props) => <CollectionPageWithSpinner
@@ -44,7 +41,6 @@ class ShopPage extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  isFetching: selectIsFetching,
   isLoaded: selectIsLoaded
 });
 
