@@ -11,6 +11,7 @@ import { fetchCollectionsStartAsync }
   from "../../redux/shop/shop.actions";
 import { selectIsFetching, selectIsLoaded }
   from "../../redux/shop/shop.selectors";
+import { createStructuredSelector } from "reselect";
 
 const CollectionsOverviewWithSpinner = WithSpinner(CollectionsOverview);
 const CollectionPageWithSpinner = WithSpinner(CollectionPage);
@@ -42,9 +43,9 @@ class ShopPage extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  isFetching: selectIsFetching(state),
-  isLoaded: selectIsLoaded(state)
+const mapStateToProps = createStructuredSelector({
+  isFetching: selectIsFetching,
+  isLoaded: selectIsLoaded
 });
 
 const mapDispatchToProps = dispatch => ({
