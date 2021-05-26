@@ -4,88 +4,54 @@ import { Route } from "react-router-dom";
 import CollectionsOverview from
 "../../components/collections-overview/collections-overview.component";
 import CollectionPage from "../collection/collection.component";
-import { firestore } from "../../firebase/firebase.utils";
 import { updateCollections } from "../../redux/shop/shop.actions";
 import { connect } from "react-redux";
 import WithSpinner
   from "../../components/with-spinner/with-spinner.component";
+import { fetchCollectionsStartAsync }
+  from "../../redux/shop/shop.actions";
+import { selectIsFetching } from "../../redux/shop/shop.selectors";
 
 const CollectionsOverviewWithSpinner = WithSpinner(CollectionsOverview);
 const CollectionPageWithSpinner = WithSpinner(CollectionPage);
 
 class ShopPage extends React.Component {
-  state = {
-    loading: true
-  };
-
-  unsubscribeFromSnapshot = null;
-
   componentDidMount() {
-    const { updateCollections } = this.props;
-    const collectionReference = firestore.collection("collections");
+    const { fetchCollectionsStartAsync } = this.props;
 
-    const convertSnapshotToMap = collections => {
-      const transformedCollection = collections.docs.map(doc => {
-        const { title, items } = doc.data();
-
-        return {
-          id: doc.id,
-          routeName: encodeURI(title.toLowerCase()),
-          title,
-          items
-        };
-      });
-
-      return transformedCollection.reduce(
-        (accumulator, collection) => {
-          accumulator[collection.title.toLowerCase()] = collection;
-          return accumulator;
-        }, {}
-      );
-    }
-
-    // this.unsubscribeFromSnapshot = collectionReference.onSnapshot(async snapshot => {
-    //   const collectionsMap = convertSnapshotToMap(snapshot);
-    //   updateCollections(collectionsMap);
-    //   this.setState({ loading: false });
-    // });
-
-    collectionReference
-      .get()
-      .then(snapshot => {
-        const collectionsMap = convertSnapshotToMap(snapshot);
-        updateCollections(collectionsMap);
-        this.setState({ loading: false });
-      });
-
-    // fetch("https://firestore.googleapis.com/v1/projects/crwn-db-4d2eb/databases/(default)/documents/collections")
-    // .then(response => response.json())
-    // .then(collections => console.log(collections));
+    fetchCollectionsStartAsync();
   }
 
   render() {
-    const { match } = this.props;
-    const { loading } = this.state;
+    const { match, isFetching } = this.props;
+
     return (
       <ShopPageContainer>
         <Route
           exact path={ `${match.path}` }
           render={ (props) => <CollectionsOverviewWithSpinner
-                                isLoading={ loading }
+                                isLoading={ isFetching }
                                 { ...props } /> } />
         <Route
           path={ `${match.path}/:collectionId` }
           render={ (props) => <CollectionPageWithSpinner
-                                isLoading={ loading }
+                                isLoading={ isFetching }
                                 { ...props } /> } />
       </ShopPageContainer>
     );
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  updateCollections: collectionsMap =>
-    dispatch(updateCollections(collectionsMap))
+const mapStateToProps = state => ({
+  isFetching: selectIsFetching(state),
 });
 
-export default connect(null, mapDispatchToProps)(ShopPage);
+const mapDispatchToProps = dispatch => ({
+  fetchCollectionsStartAsync:
+    () => dispatch(fetchCollectionsStartAsync())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ShopPage);
