@@ -4,7 +4,6 @@ import { Route } from "react-router-dom";
 import CollectionsOverview from
 "../../components/collections-overview/collections-overview.component";
 import CollectionPage from "../collection/collection.component";
-import { updateCollections } from "../../redux/shop/shop.actions";
 import { connect } from "react-redux";
 import WithSpinner
   from "../../components/with-spinner/with-spinner.component";
