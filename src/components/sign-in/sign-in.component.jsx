@@ -6,17 +6,14 @@ import { googleSignInStart, emailSignInStart }
   from "../../redux/user/user.actions";
 import { connect } from "react-redux";
 
-const SignIn = props => {
+const SignIn = ({ emailSignInStart, googleSignInStart }) => {
   const [ email, setEmail ] = useState("");
   const [ password, setPassword ] = useState("");
 
   const handleSubmit = async event => {
     event.preventDefault();
-    const { emailSignInStart } = props;
     emailSignInStart(email, password);
   };
-
-  const { googleSignInStart } = props;
 
   return (
     <SignInContainer>
