@@ -2,24 +2,35 @@ import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 import { ReactComponent as LogoSvg } from "../../assets/crown.svg";
 
+const logoWidthDesktop = 70;
+const logoWidthMobile = 50;
+const logoViewBoxRatio = 39/50;
+// svg.viewBox.height / svg.viewBox.width
+
 export const HeaderContainer = styled.div`
-  height: 70px;
   width: 100%;
+  height: ${`${ logoWidthDesktop * logoViewBoxRatio }px`};
   display: flex;
   justify-content: space-between;
   margin-bottom: 25px;
+
+  @media screen and (max-width: 800px) {
+    height: ${`${ logoWidthMobile * logoViewBoxRatio }px`};
+    margin-bottom: 20px;
+  }
 `;
 
 export const LogoContainer = styled(Link)`
-  height: 100%;
-  width: 70px;
+  width: ${`${ logoWidthDesktop }px`};
+  height: ${`${ logoWidthDesktop * logoViewBoxRatio }px`};
+
+  @media screen and (max-width: 800px) {
+    width: ${`${ logoWidthMobile }px`};
+    height: ${`${ logoWidthMobile * logoViewBoxRatio }px`};
+  }
 `;
 
-export const Logo = styled(LogoSvg)`
-  width: 50px;
-  height: 39px;
-  transform: translate(10px, 15px);
-`;
+export const Logo = styled(LogoSvg)``;
 
 export const OptionsContainer = styled.div`
   width: 50%;
@@ -27,6 +38,10 @@ export const OptionsContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+
+  @media screen and (max-width: 800px) {
+    width: 80%;
+  }
 `;
 
 const OptionStyle = css`

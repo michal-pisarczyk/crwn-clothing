@@ -16,6 +16,13 @@ export const CollectionItemButton = styled(CustomButton)`
   display: none;
   width: 80%;
   opacity: .7;
+
+  @media screen and (max-width: 800px) {
+    display: block;
+    opacity: .9;
+    min-width: unset;
+    padding: 0 10px;
+  }
 `;
 
 export const CollectionItemFooter = styled.div`
@@ -46,13 +53,17 @@ export const CollectionItemContainer = styled.div`
   align-items: center;
 
   &:hover {
-    ${CollectionItemImage} {
+    ${ CollectionItemImage } {
       opacity: .8;
     }
 
-    ${CollectionItemButton} {
+    ${ CollectionItemButton } {
       display: flex;
       opacity: .85;
     }
+  }
+
+  @media screen and (max-width: 800px) {
+    width: 40vw;
   }
 `;
