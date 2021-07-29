@@ -52,6 +52,10 @@ export const CollectionItemContainer = styled.div`
   height: 350px;
   align-items: center;
 
+  @media screen and (max-width: 800px) {
+    width: 40vw;
+  }
+
   &:hover {
     ${ CollectionItemImage } {
       opacity: .8;
@@ -61,9 +65,5 @@ export const CollectionItemContainer = styled.div`
       display: flex;
       opacity: .85;
     }
-  }
-
-  @media screen and (max-width: 800px) {
-    width: 40vw;
   }
 `;

@@ -35,6 +35,10 @@ export const Arrow = styled.span`
 
 export const ItemQuantity = styled.span`
   margin: 0 10px;
+
+  @media screen and (max-width: 800px) {
+    margin: 0;
+  }
 `;
 
 export const ItemPrice = ItemName;
